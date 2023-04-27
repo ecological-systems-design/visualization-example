@@ -1,0 +1,7 @@
+# external requirements
+
+pandas
+plotly
+dash
+Werkzeug==2.1.0
+dash_bootstrap_components
