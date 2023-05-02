@@ -1,27 +1,42 @@
-from dash import Dash
-import dash_bootstrap_components as dbc
-import pandas as pd
-from dash import html, dcc, dash_table
+from dash import Dash, dcc, html, Input, Output
 import dash_bootstrap_components as dbc
 import plotly.express as px
+import pandas as pd
 
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv')
 
-# Read data
-dataframe = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
-
-# Initialize the app
 app = Dash(
     __name__,
     external_stylesheets=[dbc.themes.PULSE]
 )
 
-# App layout
 app.layout = html.Div([
-    html.H1("Visualization example"),
-    html.H2("My First App with Data and a Graph"),
-    dash_table.DataTable(data=dataframe.to_dict('records'), page_size=10),
-    dcc.Graph(figure=px.histogram(dataframe, x='continent', y='lifeExp', histfunc='avg')),
-])
+    html.H1('Visualization example', className="my-header"),
+    dcc.Graph(id='graph-with-slider'),
+    dcc.Slider(
+        df['year'].min(),
+        df['year'].max(),
+        step=None,
+        value=df['year'].min(),
+        marks={str(year): str(year) for year in df['year'].unique()},
+        id='year-slider'
+    )
+], style={"width": "800px", "height": "800px"})
+
+
+@app.callback(
+    Output('graph-with-slider', 'figure'),
+    Input('year-slider', 'value'))
+def update_figure(selected_year):
+    filtered_df = df[df.year == selected_year]
+
+    fig = px.scatter(filtered_df, x="gdpPercap", y="lifeExp",
+                     size="pop", color="continent", hover_name="country",
+                     log_x=True, size_max=55)
+
+    fig.update_layout(transition_duration=500)
+
+    return fig
 
 
 # Run the app
