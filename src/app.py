@@ -7,7 +7,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapmi
 
 app = Dash(
     __name__,
-    external_stylesheets=[dbc.themes.PULSE]
+    external_stylesheets=[dbc.themes.SKETCHY]
 )
 
 app.layout = html.Div([
@@ -21,7 +21,7 @@ app.layout = html.Div([
         marks={str(year): str(year) for year in df['year'].unique()},
         id='year-slider'
     )
-], style={"width": "800px", "height": "800px"})
+], style={"width": "1000px", "height": "1200px"}, className="my-section")
 
 
 @app.callback(

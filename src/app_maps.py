@@ -4,6 +4,8 @@ import plotly.express as px
 import geopandas as gpd
 
 
+data = gpd.read_file('../data/zones_processed_zurich_epsg4326.gpkg', driver='GPKG')
+
 app = Dash(
     __name__,
     external_stylesheets=[dbc.themes.PULSE]
@@ -30,7 +32,6 @@ app.layout = html.Div([
     Output("graph", "figure"),
     Input("column_to_show", "value"))
 def display_choropleth(column_to_show):
-    data = gpd.read_file('../data/zones_processed_zurich_epsg4326.gpkg', driver='GPKG')
     fig = px.choropleth_mapbox(
         data,
         geojson=data.geometry,
