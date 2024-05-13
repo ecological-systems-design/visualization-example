@@ -1,5 +1,11 @@
 # Examples of Visualization Dashboard with Dash
 
+## Recording
+
+Recording of this tutorial is available:
+  - permanently on the group server Y:\Software, tools, Languages\Visualization dashboards with dash and plotly.
+  - (probably) until the end of April 2025 on the [ETHZ zoom server](https://ethz.zoom.us/rec/share/1PvkXqkOpUAiyPJ90zTgcf3Ui2io1vRO-sSnbsiLIOfvsAFz3cDh_z2KqHMLzoMC.WRA-z9eET82BX9Oe).
+
 ## Getting started
 
 1. Download or `git clone` this repository
